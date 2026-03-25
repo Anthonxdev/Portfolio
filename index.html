@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Portfolio — Senior Full Stack Developer" />
+  <title>Tu Nombre — Full Stack Developer</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- CURSOR -->
+  <div class="cursor" id="cursor"></div>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <a href="#hero" class="nav__logo">
+      <span class="nav__logo-bracket">[</span>TN<span class="nav__logo-bracket">]</span>
+    </a>
+    <ul class="nav__links" id="navLinks">
+      <li><a href="#projects" class="nav__link" data-text="Proyectos">Proyectos</a></li>
+      <li><a href="#skills"   class="nav__link" data-text="Stack">Stack</a></li>
+      <li><a href="#about"    class="nav__link" data-text="Sobre mí">Sobre mí</a></li>
+      <li><a href="#contact"  class="nav__link nav__link--cta" data-text="Contacto">Contacto</a></li>
+    </ul>
+    <button class="nav__toggle" id="navToggle" aria-label="Abrir menú">
+      <span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- ──────────── HERO ──────────── -->
+  <section class="hero" id="hero">
+    <div class="hero__grid-bg" aria-hidden="true"></div>
+
+    <div class="hero__top">
+      <span class="hero__status">
+        <span class="hero__dot"></span>Disponible para proyectos
+      </span>
+      <span class="hero__hint mono">scroll ↓</span>
+    </div>
+
+    <div class="hero__body">
+      <p class="hero__label mono">— Senior Full Stack Developer</p>
+      <h1 class="hero__title" aria-label="Diseño. Construyo. Escalo.">
+        <span class="hero__word" data-final="DISEÑO">DISEÑO</span>
+        <span class="hero__word hero__word--accent" data-final="CONSTRUYO">CONSTRUYO</span>
+        <span class="hero__word" data-final="ESCALO">ESCALO</span>
+      </h1>
+      <p class="hero__description">
+        Transformo ideas complejas en productos digitales que las personas disfrutan usar.<br />
+        Especializado en arquitecturas modernas, rendimiento y experiencia de usuario.
+      </p>
+      <div class="hero__actions">
+        <a href="#projects" class="btn btn--primary">Ver proyectos</a>
+        <a href="#contact"  class="btn btn--ghost">Hablemos <span class="btn__arrow">→</span></a>
+      </div>
+    </div>
+
+    <div class="hero__stats">
+      <div class="hero__stat">
+        <span class="hero__stat-num">5+</span>
+        <span class="hero__stat-label mono">años de experiencia</span>
+      </div>
+      <div class="hero__stat-divider" aria-hidden="true"></div>
+      <div class="hero__stat">
+        <span class="hero__stat-num">30+</span>
+        <span class="hero__stat-label mono">proyectos entregados</span>
+      </div>
+      <div class="hero__stat-divider" aria-hidden="true"></div>
+      <div class="hero__stat">
+        <span class="hero__stat-num">10+</span>
+        <span class="hero__stat-label mono">clientes satisfechos</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ──────────── PROJECTS ──────────── -->
+  <section class="section" id="projects">
+    <div class="container">
+      <header class="section__header reveal">
+        <span class="section__num mono">01</span>
+        <div>
+          <h2 class="section__title">Proyectos</h2>
+          <p class="section__sub">Una selección de trabajos recientes</p>
+        </div>
+      </header>
+
+      <div class="projects__grid">
+
+        <!-- PROYECTO 1 — Destacado (ocupa 2 columnas) -->
+        <article class="card card--featured reveal">
+          <div class="card__header">
+            <div class="card__meta">
+              <span class="card__num mono">01</span>
+              <span class="card__badge">Destacado</span>
+            </div>
+            <div class="card__links">
+              <a href="#" class="card__link" aria-label="Demo en vivo" title="Demo">↗</a>
+              <a href="#" class="card__link" aria-label="Repositorio" title="GitHub">⌥</a>
+            </div>
+          </div>
+          <span class="card__year mono">2024</span>
+          <h3 class="card__title">Nombre del Proyecto Destacado</h3>
+          <p class="card__desc">
+            Descripción del proyecto: qué problema resolvió, cuál fue tu rol y el impacto concreto que tuvo. Aquí puedes ser más extenso que en los demás.
+          </p>
+          <div class="card__stack">
+            <span class="tag">React</span>
+            <span class="tag">TypeScript</span>
+            <span class="tag">Node.js</span>
+            <span class="tag">PostgreSQL</span>
+            <span class="tag">Redis</span>
+          </div>
+        </article>
+
+        <!-- PROYECTO 2 -->
+        <article class="card reveal">
+          <div class="card__header">
+            <div class="card__meta"><span class="card__num mono">02</span></div>
+            <div class="card__links">
+              <a href="#" class="card__link">↗</a>
+              <a href="#" class="card__link">⌥</a>
+            </div>
+          </div>
+          <span class="card__year mono">2024</span>
+          <h3 class="card__title">Segundo Proyecto</h3>
+          <p class="card__desc">Descripción breve. Qué hace, qué stack usaste y cuál fue el resultado.</p>
+          <div class="card__stack">
+            <span class="tag">Vue.js</span>
+            <span class="tag">Python</span>
+            <span class="tag">Docker</span>
+          </div>
+        </article>
+
+        <!-- PROYECTO 3 -->
+        <article class="card reveal">
+          <div class="card__header">
+            <div class="card__meta"><span class="card__num mono">03</span></div>
+            <div class="card__links">
+              <a href="#" class="card__link">↗</a>
+              <a href="#" class="card__link">⌥</a>
+            </div>
+          </div>
+          <span class="card__year mono">2023</span>
+          <h3 class="card__title">Tercer Proyecto</h3>
+          <p class="card__desc">Descripción breve del proyecto, destacando la tecnología y el valor generado.</p>
+          <div class="card__stack">
+            <span class="tag">Next.js</span>
+            <span class="tag">GraphQL</span>
+            <span class="tag">AWS</span>
+          </div>
+        </article>
+
+        <!-- PROYECTO 4 -->
+        <article class="card reveal">
+          <div class="card__header">
+            <div class="card__meta"><span class="card__num mono">04</span></div>
+            <div class="card__links">
+              <a href="#" class="card__link">↗</a>
+              <a href="#" class="card__link">⌥</a>
+            </div>
+          </div>
+          <span class="card__year mono">2023</span>
+          <h3 class="card__title">Cuarto Proyecto</h3>
+          <p class="card__desc">Descripción breve. Contexto del cliente, reto técnico y solución implementada.</p>
+          <div class="card__stack">
+            <span class="tag">Laravel</span>
+            <span class="tag">MySQL</span>
+            <span class="tag">Nginx</span>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ──────────── SKILLS ──────────── -->
+  <section class="section section--alt" id="skills">
+    <div class="container">
+      <header class="section__header reveal">
+        <span class="section__num mono">02</span>
+        <div>
+          <h2 class="section__title">Stack</h2>
+          <p class="section__sub">Tecnologías con las que trabajo a diario</p>
+        </div>
+      </header>
+      <!-- Renderizado por skills.js -->
+      <div class="skills__wrapper" id="skillsWrapper"></div>
+    </div>
+  </section>
+
+  <!-- ──────────── ABOUT ──────────── -->
+  <section class="section" id="about">
+    <div class="container">
+      <header class="section__header reveal">
+        <span class="section__num mono">03</span>
+        <div>
+          <h2 class="section__title">Sobre mí</h2>
+        </div>
+      </header>
+
+      <div class="about__grid">
+        <div class="about__copy reveal">
+          <p class="about__p">
+            Soy un desarrollador full stack con más de <strong>5 años construyendo</strong> productos digitales de principio a fin. Me muevo con igual comodidad en el frontend y el backend, y me obsesiona la calidad del código tanto como la experiencia del usuario final.
+          </p>
+          <p class="about__p">
+            Trabajo mejor en entornos donde la autonomía importa y los problemas son genuinamente difíciles. Si tu equipo valora el código limpio, la comunicación directa y entregar a tiempo, probablemente seamos una buena combinación.
+          </p>
+          <a href="#contact" class="btn btn--primary">Trabajemos juntos</a>
+        </div>
+
+        <div class="about__pillars reveal">
+          <div class="pillar">
+            <span class="pillar__arrow">→</span>
+            <div class="pillar__body">
+              <h4 class="pillar__title">Clean Code</h4>
+              <p class="pillar__desc">El código que escribo hoy lo mantiene alguien mañana.</p>
+            </div>
+          </div>
+          <div class="pillar">
+            <span class="pillar__arrow">→</span>
+            <div class="pillar__body">
+              <h4 class="pillar__title">Rendimiento</h4>
+              <p class="pillar__desc">Cada milisegundo cuenta en la experiencia del usuario.</p>
+            </div>
+          </div>
+          <div class="pillar">
+            <span class="pillar__arrow">→</span>
+            <div class="pillar__body">
+              <h4 class="pillar__title">Pragmatismo</h4>
+              <p class="pillar__desc">La solución correcta, no la más sofisticada.</p>
+            </div>
+          </div>
+          <div class="pillar">
+            <span class="pillar__arrow">→</span>
+            <div class="pillar__body">
+              <h4 class="pillar__title">Comunicación</h4>
+              <p class="pillar__desc">Actualizaciones claras, sin tecnicismos innecesarios.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ──────────── CONTACT ──────────── -->
+  <section class="section section--contact" id="contact">
+    <div class="container">
+      <div class="contact__inner reveal">
+        <span class="section__num mono">04</span>
+        <h2 class="contact__title">
+          ¿Tienes un proyecto<br /><em>en mente?</em>
+        </h2>
+        <p class="contact__sub">Cuéntame sobre él. Respondo en menos de 24 horas.</p>
+        <a href="mailto:tu@email.com" class="btn btn--primary btn--lg">
+          Escribir un mensaje <span class="btn__arrow">→</span>
+        </a>
+        <div class="contact__socials">
+          <a href="#" class="contact__social" target="_blank" rel="noopener">GitHub</a>
+          <span class="contact__sep" aria-hidden="true">·</span>
+          <a href="#" class="contact__social" target="_blank" rel="noopener">LinkedIn</a>
+          <span class="contact__sep" aria-hidden="true">·</span>
+          <a href="#" class="contact__social" target="_blank" rel="noopener">Twitter / X</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <span class="mono">© 2025 Tu Nombre</span>
+        <span class="mono footer__made">Diseñado &amp; construido a mano</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/skills.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

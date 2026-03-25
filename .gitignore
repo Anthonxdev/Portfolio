@@ -1,0 +1,15 @@
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+*.sublime-workspace
+
+# Logs
+*.log
+
+# Assets temporales
+assets/img/.gitkeep
