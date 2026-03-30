@@ -741,27 +741,53 @@ const _isTouch = window.matchMedia('(pointer: coarse)').matches;
     });
   });
 
-  /* ── Trigger assembly when section is visible ─ */
-  let played = false;
+  /* ── Trigger assembly / decomposition on scroll ─ */
+  let currentAnim = null;
+
+  function assemble() {
+    if (currentAnim) currentAnim.pause();
+    currentAnim = anime({
+      targets:    chars,
+      translateX: 0,
+      translateY: 0,
+      rotate:     0,
+      opacity:    1,
+      duration:   1100,
+      delay:      anime.stagger(28, { from: 'center' }),
+      easing:     'easeOutExpo',
+    });
+  }
+
+  function scatter() {
+    if (currentAnim) currentAnim.pause();
+    currentAnim = anime({
+      targets:    chars,
+      translateX: (_, i) => scatterData[i].tx,
+      translateY: (_, i) => scatterData[i].ty,
+      rotate:     (_, i) => scatterData[i].rot,
+      opacity:    0,
+      duration:   800,
+      delay:      anime.stagger(18, { from: 'center' }),
+      easing:     'easeInExpo',
+    });
+  }
+
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
-      if (entry.isIntersecting && !played) {
-        played = true;
-        observer.disconnect();
-
-        anime({
-          targets:     chars,
-          translateX:  0,
-          translateY:  0,
-          rotate:      0,
-          opacity:     1,
-          duration:    1100,
-          delay:       anime.stagger(28, { from: 'center' }),
-          easing:      'easeOutExpo',
-        });
+      if (entry.isIntersecting) {
+        assemble();
+      } else {
+        scatter();
       }
     });
   }, { threshold: 0.25 });
 
   observer.observe(document.getElementById('contact'));
+
+  /* ── Hover: scatter on enter, reassemble on leave ─ */
+  if (!_isTouch) {
+    title.style.cursor = 'default';
+    title.addEventListener('mouseenter', () => scatter());
+    title.addEventListener('mouseleave', () => assemble());
+  }
 })();
