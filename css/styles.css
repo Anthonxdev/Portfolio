@@ -402,7 +402,7 @@ body::after {
   align-items: center;
   gap: var(--space-lg);
   padding-top: var(--space-lg);
-  border-top: 1px solid var(--border);
+  /*border-top: 1px solid var(--border);*/
   position: relative;
   z-index: 1;
   animation: fadeUp 0.8s ease 1.3s both;
@@ -784,6 +784,26 @@ body::after {
   align-items: start;
 }
 
+/* ── Photo column ─────────────────────────── */
+.about__photo {
+  position: relative;
+}
+
+/* Corner accent frame — top-right decorative bracket */
+.about__photo-deco {
+  position: absolute;
+  top: -14px;
+  right: -14px;
+  width: 52%;
+  height: 52%;
+  border-top: 2px solid var(--accent);
+  border-right: 2px solid var(--accent);
+  border-radius: 0 var(--radius) 0 0;
+  box-shadow: 2px -2px 8px rgba(200, 255, 0, 0.3);
+  pointer-events: none;
+  z-index: 0;
+}
+
 .about__photo-wrap {
   position: relative;
   width: 100%;
@@ -791,6 +811,7 @@ body::after {
   border-radius: var(--radius);
   overflow: hidden;
   border: 1px solid var(--border);
+  z-index: 1;
 }
 .about__photo-wrap::after {
   content: '';
@@ -805,13 +826,53 @@ body::after {
   object-fit: cover;
   object-position: center top;
   display: block;
-  filter: grayscale(20%);
-  transition: filter var(--transition);
+  filter: grayscale(15%);
+  transition: filter 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .about__photo-wrap:hover .about__img {
   filter: grayscale(0%);
 }
 
+/* Social links below photo */
+.about__socials {
+  display: flex;
+  flex-direction: column;
+  margin-top: var(--space-md);
+  border-top: 1px solid var(--border);
+  padding-top: var(--space-xs);
+}
+.about__social {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 10px 0;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  border-bottom: 1px solid var(--border);
+  transition: color var(--transition), padding-left var(--transition);
+}
+.about__social:last-child { border-bottom: none; }
+.about__social:hover {
+  color: var(--accent);
+  padding-left: 4px;
+}
+.about__social-icon {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+  opacity: 0.6;
+  transition: opacity var(--transition);
+}
+.about__social:hover .about__social-icon { opacity: 1; }
+.about__social-arrow {
+  margin-left: auto;
+  transition: transform var(--transition);
+  font-size: 0.75rem;
+}
+.about__social:hover .about__social-arrow { transform: translate(2px, -2px); }
+
+/* ── Bio copy ─────────────────────────────── */
 .about__p {
   font-size: 1rem;
   color: var(--text-dim);
@@ -823,42 +884,96 @@ body::after {
   font-weight: 600;
 }
 
+/* ── Pillars ──────────────────────────────── */
 .about__pillars {
   display: flex;
   flex-direction: column;
-  gap: var(--space-lg);
 }
 
 .pillar {
-  display: flex;
-  gap: var(--space-md);
-  padding: var(--space-md);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  transition: border-color var(--transition), background var(--transition);
+  position: relative;
+  border-left: 1px solid var(--border);
+  transition: border-color var(--transition);
+  perspective: 900px;
 }
-.pillar:hover {
-  border-color: var(--border-hover);
-  background: var(--bg-card);
+.pillar:hover { border-left-color: var(--accent); }
+
+/* Animated accent overlay on the left border */
+.pillar__line {
+  position: absolute;
+  left: -1px;
+  top: 0;
+  width: 2px;
+  height: 0;
+  background: var(--accent);
+  border-radius: 1px;
+  box-shadow: 0 0 6px rgba(200, 255, 0, 0.4);
+  z-index: 2;
 }
 
-.pillar__arrow {
-  color: var(--accent);
-  font-size: 1rem;
-  flex-shrink: 0;
-  margin-top: 2px;
+/* ── Flip inner ───────────────────────────── */
+.pillar__inner {
+  display: grid;
+  transform-style: preserve-3d;
+  transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
 }
+.pillar:hover .pillar__inner { transform: rotateY(180deg); }
+
+.pillar__front,
+.pillar__back {
+  grid-area: 1 / 1;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+  padding: var(--space-md) 0 var(--space-md) var(--space-lg);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.pillar__back {
+  transform: rotateY(180deg);
+  background: var(--accent-dim);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  align-items: center;
+  gap: var(--space-lg);
+}
+
+.pillar__num {
+  color: var(--accent);
+  font-size: 0.78rem;
+  opacity: 0.55;
+  flex-shrink: 0;
+  padding-top: 2px;
+  min-width: 1.8rem;
+  transition: opacity var(--transition);
+}
+.pillar:hover .pillar__num { opacity: 1; }
 
 .pillar__title {
-  font-size: 0.9rem;
+  font-size: 1.05rem;
   font-weight: 600;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
   letter-spacing: -0.01em;
 }
 .pillar__desc {
-  font-size: 0.82rem;
+  font-size: 0.95rem;
   color: var(--text-dim);
   line-height: 1.6;
+}
+
+/* ── Pillar back face content ─────────────── */
+.pillar__back-symbol {
+  font-size: 1.3rem;
+  color: var(--accent);
+  flex-shrink: 0;
+  min-width: 2.2rem;
+  line-height: 1;
+}
+.pillar__back-text {
+  font-size: 0.82rem;
+  color: var(--text-dim);
+  line-height: 1.55;
+  font-style: italic;
 }
 
 /* ═══════════════════════════════════════════
@@ -894,7 +1009,7 @@ body::after {
 .contact__sub {
   font-size: 1rem;
   color: var(--text-dim);
-  max-width: 380px;
+  white-space: nowrap;
   margin-top: -var(--space-sm);
 }
 
@@ -931,10 +1046,27 @@ body::after {
 /* ── ACCENT TEXT UTILITY ──────────────────── */
 .text--accent { color: var(--accent); }
 
+/* ── HERO ORBITAL CANVAS ──────────────────── */
+.hero__orbit {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 54%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0;
+  /* Fade the left edge so the canvas never bleeds over the headline */
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 28%);
+          mask-image: linear-gradient(to right, transparent 0%, black 28%);
+}
+
 /* ═══════════════════════════════════════════
    RESPONSIVE
 ═══════════════════════════════════════════ */
 @media (max-width: 900px) {
+  .hero__orbit { display: none; }
+
   .about__grid {
     grid-template-columns: 1fr;
     gap: var(--space-xl);
