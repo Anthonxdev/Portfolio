@@ -255,6 +255,24 @@ body::after {
   background: var(--accent-dim);
 }
 
+/* Language toggle */
+.nav__lang {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: color var(--transition), border-color var(--transition), background var(--transition);
+}
+.nav__lang:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--accent-dim);
+}
+
 /* Mobile toggle */
 .nav__toggle {
   display: none;
@@ -1487,6 +1505,7 @@ body::after {
   .nav__links.is-open { transform: translateX(0); }
   .nav__link { font-size: 1.4rem; }
   .nav__link--cta { padding: 12px 28px; }
+  .nav__lang { font-size: 1rem; padding: 8px 20px; }
   .nav__toggle { display: flex; }
 
   .hero__stats {

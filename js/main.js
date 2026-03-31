@@ -54,7 +54,10 @@
     const open = toggle.classList.toggle('is-open');
     links.classList.toggle('is-open', open);
     document.body.style.overflow = open ? 'hidden' : '';
-    toggle.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+    const i18n = window.i18n;
+    toggle.setAttribute('aria-label', open
+      ? (i18n ? i18n.t('nav.toggle.close') : 'Close menu')
+      : (i18n ? i18n.t('nav.toggle.open')  : 'Open menu'));
   });
 
   links.querySelectorAll('.nav__link').forEach(link => {
@@ -259,13 +262,13 @@
         delay:      anime.stagger(80, { start: 60 }),
         easing:     'easeOutCubic'
       });
-      label.textContent = 'Ver menos';
+      label.textContent = window.i18n ? window.i18n.t('projects.toggle.less') : 'View less';
     } else {
       hidden.forEach(item => {
         item.style.display = 'none';
         item.classList.remove('is-visible');
       });
-      label.textContent = 'Ver todos los proyectos';
+      label.textContent = window.i18n ? window.i18n.t('projects.toggle.more') : 'View all projects';
       list.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   });

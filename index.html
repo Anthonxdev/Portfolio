@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Portfolio — Senior Full Stack Developer" />
-  <title>Tu Nombre — Full Stack Developer</title>
+  <meta name="description" content="Anthony Marc Sosa — Senior Full Stack Developer" />
+  <title>Anthony Marc Sosa — Full Stack Developer</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -20,17 +20,17 @@
   <div class="exit-modal" id="exitModal" role="dialog" aria-modal="true" aria-labelledby="exitModalTitle" hidden>
     <div class="exit-modal__backdrop" id="exitModalBackdrop"></div>
     <div class="exit-modal__card">
-      <button class="exit-modal__close" id="exitModalClose" aria-label="Cerrar">✕</button>
-      <p class="exit-modal__eyebrow mono">Espera un momento...</p>
-      <h2 class="exit-modal__title" id="exitModalTitle">¿Ya te vas?</h2>
-      <p class="exit-modal__body">Tengo las habilidades para convertir tu idea en un producto real.<br>Hablemos, sin compromiso.</p>
+      <button class="exit-modal__close" id="exitModalClose" data-i18n-aria="modal.close" aria-label="Close">✕</button>
+      <p class="exit-modal__eyebrow mono" data-i18n="modal.eyebrow">Wait a moment...</p>
+      <h2 class="exit-modal__title" id="exitModalTitle" data-i18n="modal.title">Leaving already?</h2>
+      <p class="exit-modal__body" data-i18n="modal.body">I have the skills to turn your idea into a real product.<br>Let's talk, no commitment.</p>
       <a class="exit-modal__cta"
-         href="https://wa.me/18498686348?text=Hola%20Anthony%2C%20vi%20tu%20portfolio%20y%20me%20gustar%C3%ADa%20hablar%20sobre%20un%20proyecto"
+         href="https://wa.me/18498686348?text=Hi%20Anthony%2C%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20talk%20about%20a%20project"
          target="_blank" rel="noopener">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        Hablemos por WhatsApp
+        <span data-i18n="modal.cta">Let's chat on WhatsApp</span>
       </a>
-      <button class="exit-modal__dismiss" id="exitModalDismiss">Quizás en otro momento</button>
+      <button class="exit-modal__dismiss" id="exitModalDismiss" data-i18n="modal.dismiss">Maybe another time</button>
     </div>
   </div>
 
@@ -40,12 +40,13 @@
       <span class="nav__logo-bracket">[</span>ANTHONY MARC SOSA<span class="nav__logo-bracket">]</span>
     </a>
     <ul class="nav__links" id="navLinks">
-      <li><a href="#projects" class="nav__link" data-text="Proyectos">Proyectos</a></li>
-      <li><a href="#skills"   class="nav__link" data-text="Stack">Stack</a></li>
-      <li><a href="#about"    class="nav__link" data-text="Sobre mí">Sobre mí</a></li>
-      <li><a href="#contact"  class="nav__link nav__link--cta" data-text="Contacto">Contacto</a></li>
+      <li><a href="#projects" class="nav__link" data-text="Projects" data-i18n="nav.projects">Projects</a></li>
+      <li><a href="#skills"   class="nav__link" data-text="Stack"    data-i18n="nav.stack">Stack</a></li>
+      <li><a href="#about"    class="nav__link" data-text="About"    data-i18n="nav.about">About</a></li>
+      <li><a href="#contact"  class="nav__link nav__link--cta"       data-i18n="nav.contact">Contact</a></li>
+      <li><button class="nav__lang" id="langToggle" aria-label="Switch language">ES</button></li>
     </ul>
-    <button class="nav__toggle" id="navToggle" aria-label="Abrir menú">
+    <button class="nav__toggle" id="navToggle" data-i18n-aria="nav.toggle.open" aria-label="Open menu">
       <span></span><span></span>
     </button>
   </nav>
@@ -56,25 +57,25 @@
 
     <div class="hero__top">
       <span class="hero__status">
-        <span class="hero__dot"></span>Disponible para proyectos
+        <span class="hero__dot"></span><span data-i18n="hero.status">Available for projects</span>
       </span>
       <span class="hero__hint mono">scroll ↓</span>
     </div>
 
     <div class="hero__body">
-      <p class="hero__label mono">— Senior Full Stack Developer</p>
-      <h1 class="hero__title" aria-label="Diseño. Construyo. Escalo.">
-        <span class="hero__word" data-final="DISEÑO">DISEÑO</span>
-        <span class="hero__word hero__word--accent" data-final="CONSTRUYO">CONSTRUYO</span>
-        <span class="hero__word" data-final="ESCALO">ESCALO</span>
+      <p class="hero__label mono" data-i18n="hero.label">— Senior Full Stack Developer</p>
+      <h1 class="hero__title" aria-label="Design. Build. Scale.">
+        <span class="hero__word" data-final="DESIGN" data-i18n="hero.word1">DESIGN</span>
+        <span class="hero__word hero__word--accent" data-final="BUILD" data-i18n="hero.word2">BUILD</span>
+        <span class="hero__word" data-final="SCALE" data-i18n="hero.word3">SCALE</span>
       </h1>
-      <p class="hero__description">
-        Transformo ideas complejas en productos digitales que las personas disfrutan usar.<br />
-        Especializado en arquitecturas modernas, rendimiento y experiencia de usuario.
+      <p class="hero__description" data-i18n="hero.desc">
+        I turn complex ideas into digital products people love to use.<br />
+        Specialized in modern architectures, performance, and user experience.
       </p>
       <div class="hero__actions">
-        <a href="#projects" class="btn btn--primary">Ver proyectos</a>
-        <a href="#contact"  class="btn btn--ghost">Hablemos <span class="btn__arrow">→</span></a>
+        <a href="#projects" class="btn btn--primary" data-i18n="hero.btn.projects">View projects</a>
+        <a href="#contact"  class="btn btn--ghost"><span data-i18n="hero.btn.contact">Let's talk</span> <span class="btn__arrow">→</span></a>
       </div>
     </div>
 
@@ -88,8 +89,8 @@
     <div class="container">
       <header class="section__header reveal">
         <div>
-          <h2 class="section__title">Proyectos</h2>
-          <p class="section__sub">Una selección de trabajos recientes</p>
+          <h2 class="section__title" data-i18n="projects.title">Projects</h2>
+          <p class="section__sub" data-i18n="projects.sub">A selection of recent work</p>
         </div>
       </header>
 
@@ -100,7 +101,7 @@
           <span class="pj-item__num mono" aria-hidden="true" style="display:none">01</span>
           <div class="pj-item__body">
             <h3 class="pj-item__name">Vamos Rural <span class="pj-item__flag" aria-label="España"><svg viewBox="0 0 3 2" width="22" height="15" xmlns="http://www.w3.org/2000/svg"><rect width="3" height="2" fill="#c60b1e"/><rect y=".5" width="3" height="1" fill="#ffc400"/></svg></span></h3>
-            <p class="pj-item__desc">Plataforma de turismo rural en República Dominicana</p>
+            <p class="pj-item__desc" data-i18n="projects.vamosrural.desc">Rural tourism platform in the Dominican Republic</p>
           </div>
           <div class="pj-item__meta">
             <div class="pj-item__stack">
@@ -113,7 +114,7 @@
             </div>
             <div class="pj-item__side">
               <span class="pj-item__year mono">Sep. 2025</span>
-              <span class="pj-item__btn">Ver proyecto ↗</span>
+              <span class="pj-item__btn" data-i18n="projects.btn">View project ↗</span>
             </div>
           </div>
           <div class="pj-item__preview">
@@ -126,7 +127,7 @@
           <span class="pj-item__num mono" aria-hidden="true" style="display:none">02</span>
           <div class="pj-item__body">
             <h3 class="pj-item__name">Mapple Studios SRL <span class="pj-item__flag" aria-label="República Dominicana"><svg viewBox="0 0 3 2" width="22" height="15" xmlns="http://www.w3.org/2000/svg"><rect width="1.5" height="1" fill="#002d62"/><rect x="1.5" width="1.5" height="1" fill="#cf142b"/><rect y="1" width="1.5" height="1" fill="#cf142b"/><rect x="1.5" y="1" width="1.5" height="1" fill="#002d62"/><rect x="1.3" width=".4" height="2" fill="#fff"/><rect y=".8" width="3" height=".4" fill="#fff"/></svg></span></h3>
-            <p class="pj-item__desc">Tienda en línea de sublimación y artículos personalizados en República Dominicana</p>
+            <p class="pj-item__desc" data-i18n="projects.mapple.desc">Online sublimation and custom merchandise store in the Dominican Republic</p>
           </div>
           <div class="pj-item__meta">
             <div class="pj-item__stack">
@@ -136,7 +137,7 @@
             </div>
             <div class="pj-item__side">
               <span class="pj-item__year mono">Ene. 2026</span>
-              <span class="pj-item__btn">Ver proyecto ↗</span>
+              <span class="pj-item__btn" data-i18n="projects.btn">View project ↗</span>
             </div>
           </div>
           <div class="pj-item__preview">
@@ -149,7 +150,7 @@
           <span class="pj-item__num mono" aria-hidden="true" style="display:none">03</span>
           <div class="pj-item__body">
             <h3 class="pj-item__name">Active Labor Solutions <span class="pj-item__flag" aria-label="República Dominicana"><svg viewBox="0 0 3 2" width="22" height="15" xmlns="http://www.w3.org/2000/svg"><rect width="1.5" height="1" fill="#002d62"/><rect x="1.5" width="1.5" height="1" fill="#cf142b"/><rect y="1" width="1.5" height="1" fill="#cf142b"/><rect x="1.5" y="1" width="1.5" height="1" fill="#002d62"/><rect x="1.3" width=".4" height="2" fill="#fff"/><rect y=".8" width="3" height=".4" fill="#fff"/></svg></span></h3>
-            <p class="pj-item__desc">Plataforma de empleos en República Dominicana — conecta candidatos y empresas</p>
+            <p class="pj-item__desc" data-i18n="projects.als.desc">Job platform in the Dominican Republic — connects candidates and companies</p>
           </div>
           <div class="pj-item__meta">
             <div class="pj-item__stack">
@@ -159,7 +160,7 @@
             </div>
             <div class="pj-item__side">
               <span class="pj-item__year mono">Ene. 2025</span>
-              <span class="pj-item__btn">Ver proyecto ↗</span>
+              <span class="pj-item__btn" data-i18n="projects.btn">View project ↗</span>
             </div>
           </div>
           <div class="pj-item__preview">
@@ -172,7 +173,7 @@
           <span class="pj-item__num mono" aria-hidden="true" style="display:none">04</span>
           <div class="pj-item__body">
             <h3 class="pj-item__name">Easy Online English <span class="pj-item__flag" aria-label="Estados Unidos"><svg viewBox="0 0 19 10" width="26" height="14" xmlns="http://www.w3.org/2000/svg"><rect width="19" height="10" fill="#fff"/><rect width="19" height=".77" fill="#B22234"/><rect y="1.54" width="19" height=".77" fill="#B22234"/><rect y="3.08" width="19" height=".77" fill="#B22234"/><rect y="4.62" width="19" height=".77" fill="#B22234"/><rect y="6.15" width="19" height=".77" fill="#B22234"/><rect y="7.69" width="19" height=".77" fill="#B22234"/><rect y="9.23" width="19" height=".77" fill="#B22234"/><rect width="7.6" height="5.38" fill="#3C3B6E"/></svg></span></h3>
-            <p class="pj-item__desc">Plataforma de cursos para aprender a hablar inglés online</p>
+            <p class="pj-item__desc" data-i18n="projects.eoe.desc">Course platform to learn how to speak English online</p>
           </div>
           <div class="pj-item__meta">
             <div class="pj-item__stack">
@@ -183,7 +184,7 @@
             </div>
             <div class="pj-item__side">
               <span class="pj-item__year mono">Ene. 2024</span>
-              <span class="pj-item__btn">Ver proyecto ↗</span>
+              <span class="pj-item__btn" data-i18n="projects.btn">View project ↗</span>
             </div>
           </div>
         </a>
@@ -193,7 +194,7 @@
           <span class="pj-item__num mono" aria-hidden="true" style="display:none">05</span>
           <div class="pj-item__body">
             <h3 class="pj-item__name">Las Lomas Serenas <span class="pj-item__flag" aria-label="República Dominicana"><svg viewBox="0 0 3 2" width="22" height="15" xmlns="http://www.w3.org/2000/svg"><rect width="1.5" height="1" fill="#002d62"/><rect x="1.5" width="1.5" height="1" fill="#cf142b"/><rect y="1" width="1.5" height="1" fill="#cf142b"/><rect x="1.5" y="1" width="1.5" height="1" fill="#002d62"/><rect x="1.3" width=".4" height="2" fill="#fff"/><rect y=".8" width="3" height=".4" fill="#fff"/></svg></span></h3>
-            <p class="pj-item__desc">Sitio web de real estate con proyecto de apartamentos de bajo costo</p>
+            <p class="pj-item__desc" data-i18n="projects.lomasserenas.desc">Real estate website with affordable apartment project</p>
           </div>
           <div class="pj-item__meta">
             <div class="pj-item__stack">
@@ -203,7 +204,7 @@
             </div>
             <div class="pj-item__side">
               <span class="pj-item__year mono">Ene. 2026</span>
-              <span class="pj-item__btn">Ver proyecto ↗</span>
+              <span class="pj-item__btn" data-i18n="projects.btn">View project ↗</span>
             </div>
           </div>
         </a>
@@ -212,7 +213,7 @@
 
       <div class="projects__toggle-bar">
         <button class="projects__toggle" id="projectsToggle" aria-expanded="false">
-          <span class="projects__toggle-text">Ver todos los proyectos</span>
+          <span class="projects__toggle-text" data-i18n="projects.toggle.more">View all projects</span>
           <span class="projects__toggle-icon mono">↓</span>
         </button>
       </div>
@@ -227,8 +228,8 @@
       <header class="section__header reveal">
        
         <div>
-          <h2 class="section__title">Stack <em class="accent-word" style="color:#c8ff00;font-style:normal;text-shadow:0 0 18px rgba(200,255,0,0.5)">Tecnológico</em></h2>
-          <p class="section__sub">Tecnologías con las que trabajo a diario</p>
+          <h2 class="section__title" data-i18n="skills.title">Tech <em class="accent-word" style="color:#c8ff00;font-style:normal;text-shadow:0 0 18px rgba(200,255,0,0.5)">Stack</em></h2>
+          <p class="section__sub" data-i18n="skills.sub">Technologies I work with daily</p>
         </div>
       </header>
       <canvas class="skills__globe" id="skillsGlobe" aria-label="Esfera interactiva de tecnologías"></canvas>
@@ -241,7 +242,7 @@
       <header class="section__header reveal">
     
         <div>
-          <h2 class="section__title">Sobre mí</h2>
+          <h2 class="section__title" data-i18n="about.title">About me</h2>
         </div>
       </header>
 
@@ -251,9 +252,9 @@
         <div class="about__photo reveal">
           <div class="about__photo-deco" aria-hidden="true"></div>
           <div class="about__photo-wrap">
-            <img src="assets/img/profilepic.png" alt="Foto de perfil" class="about__img" />
+            <img src="assets/img/profilepic.png" alt="Profile photo" class="about__img" />
           </div>
-          <nav class="about__socials" aria-label="Redes sociales">
+          <nav class="about__socials" aria-label="Social links">
             <a href="https://github.com/Anthonxdev" class="about__social" target="_blank" rel="noopener">
               <svg class="about__social-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
               GitHub <span class="about__social-arrow">↗</span>
@@ -268,20 +269,20 @@
             </a>
             <a href="assets/resume.pdf" class="about__social" download>
               <svg class="about__social-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><polyline points="9 15 12 18 15 15"/></svg>
-              Descargar CV <span class="about__social-arrow">↓</span>
+              <span data-i18n="about.cv">Download CV</span> <span class="about__social-arrow">↓</span>
             </a>
           </nav>
         </div>
 
         <!-- BIO -->
         <div class="about__copy reveal">
-          <p class="about__p">
-            Soy un desarrollador full stack con más de <strong>5 años construyendo</strong> productos digitales de principio a fin. Me muevo con igual comodidad en el frontend y el backend, y me obsesiona la calidad del código tanto como la experiencia del usuario final.
+          <p class="about__p" data-i18n="about.p1">
+            I'm a full stack developer with over <strong>5 years building</strong> digital products from start to finish. I'm equally comfortable on the frontend and backend, and obsessed with code quality as much as the end-user experience.
           </p>
-          <p class="about__p">
-            Trabajo mejor en entornos donde la autonomía importa y los problemas son genuinamente difíciles. Si tu equipo valora el código limpio, la comunicación directa y entregar a tiempo, probablemente seamos una buena combinación.
+          <p class="about__p" data-i18n="about.p2">
+            I work best in environments where autonomy matters and problems are genuinely hard. If your team values clean code, direct communication, and shipping on time, we're probably a great fit.
           </p>
-          <a href="#contact" class="btn btn--primary" data-runaway>Trabajemos juntos</a>
+          <a href="#contact" class="btn btn--primary" data-runaway data-i18n="about.cta">Let's work together</a>
         </div>
 
         <!-- PILLARS -->
@@ -292,13 +293,13 @@
               <div class="pillar__front">
                 <span class="pillar__num mono">01</span>
                 <div class="pillar__body">
-                  <h4 class="pillar__title">Clean Code</h4>
-                  <p class="pillar__desc">El código que escribo hoy lo mantiene alguien mañana.</p>
+                  <h4 class="pillar__title" data-i18n="pillar1.title">Clean Code</h4>
+                  <p class="pillar__desc" data-i18n="pillar1.desc">The code I write today is maintained by someone tomorrow.</p>
                 </div>
               </div>
               <div class="pillar__back">
                 <span class="pillar__back-symbol mono">{}</span>
-                <p class="pillar__back-text">Código que se lee como prosa, no como un acertijo.</p>
+                <p class="pillar__back-text" data-i18n="pillar1.back">Code that reads like prose, not a puzzle.</p>
               </div>
             </div>
           </div>
@@ -308,13 +309,13 @@
               <div class="pillar__front">
                 <span class="pillar__num mono">02</span>
                 <div class="pillar__body">
-                  <h4 class="pillar__title">Rendimiento</h4>
-                  <p class="pillar__desc">Cada milisegundo cuenta en la experiencia del usuario.</p>
+                  <h4 class="pillar__title" data-i18n="pillar2.title">Performance</h4>
+                  <p class="pillar__desc" data-i18n="pillar2.desc">Every millisecond counts in the user experience.</p>
                 </div>
               </div>
               <div class="pillar__back">
                 <span class="pillar__back-symbol mono">&lt;/&gt;</span>
-                <p class="pillar__back-text">Métricas primero, optimización después. Siempre medido.</p>
+                <p class="pillar__back-text" data-i18n="pillar2.back">Metrics first, optimization after. Always measured.</p>
               </div>
             </div>
           </div>
@@ -324,13 +325,13 @@
               <div class="pillar__front">
                 <span class="pillar__num mono">03</span>
                 <div class="pillar__body">
-                  <h4 class="pillar__title">Comunicación</h4>
-                  <p class="pillar__desc">Actualizaciones claras, sin tecnicismos innecesarios.</p>
+                  <h4 class="pillar__title" data-i18n="pillar3.title">Communication</h4>
+                  <p class="pillar__desc" data-i18n="pillar3.desc">Clear updates, without unnecessary jargon.</p>
                 </div>
               </div>
               <div class="pillar__back">
                 <span class="pillar__back-symbol mono">[]</span>
-                <p class="pillar__back-text">Los mejores equipos hablan claro. Yo también.</p>
+                <p class="pillar__back-text" data-i18n="pillar3.back">The best teams speak plainly. So do I.</p>
               </div>
             </div>
           </div>
@@ -345,19 +346,19 @@
     <div class="container">
       <div class="contact__inner reveal">
         
-        <h2 class="contact__title">
-          ¿Tienes un proyecto <em>en mente?</em>
+        <h2 class="contact__title" data-i18n="contact.title">
+          Have a project <em>in mind?</em>
         </h2>
-        <p class="contact__sub">Cuéntame sobre él. <span class="contact__sub-inline">Respondo en menos de 24 horas.</span></p>
-        <a href="https://wa.me/18498686348?text=Hola%2C%20vi%20tu%20portfolio%20y%20me%20gustar%C3%ADa%20hablar%20contigo%20sobre%20un%20proyecto." class="btn btn--primary btn--lg" target="_blank" rel="noopener">
-          Escribir un mensaje <span class="btn__arrow">→</span>
+        <p class="contact__sub" data-i18n="contact.sub">Tell me about it. <span class="contact__sub-inline">I reply in less than 24 hours.</span></p>
+        <a href="https://wa.me/18498686348?text=Hi%2C%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20talk%20about%20a%20project." class="btn btn--primary btn--lg" target="_blank" rel="noopener">
+          <span data-i18n="contact.btn">Send a message</span> <span class="btn__arrow">→</span>
         </a>
         <div class="contact__socials">
           <a href="https://github.com/Anthonxdev" class="contact__social" target="_blank" rel="noopener">GitHub</a>
           <span class="contact__sep" aria-hidden="true">·</span>
           <a href="#" class="contact__social" target="_blank" rel="noopener">LinkedIn</a>
           <span class="contact__sep" aria-hidden="true">·</span>
-          <a href="assets/resume.pdf" class="contact__social" download>Descargar CV</a>
+          <a href="assets/resume.pdf" class="contact__social" download data-i18n="contact.cv">Download CV</a>
         </div>
       </div>
     </div>
@@ -368,13 +369,14 @@
     <div class="container">
       <div class="footer__inner">
         <span class="mono">© 2026 Anthony Marc Sosa</span>
-        <span class="mono footer__made">Hecho &amp; en Republica Dominicana</span>
+        <span class="mono footer__made" data-i18n="footer.made">Made &amp; in Dominican Republic</span>
       </div>
     </div>
   </footer>
 
   <script src="js/anime.min.js"></script>
   <script src="js/skills.js"></script>
+  <script src="js/i18n.js"></script>
   <script src="js/main.js"></script>
   <script src="js/animations.js"></script>
 </body>
