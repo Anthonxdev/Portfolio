@@ -12,6 +12,7 @@ html {
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  overflow-x: hidden;
 }
 
 body {
@@ -710,13 +711,27 @@ body::after {
 /* Responsive */
 @media (max-width: 680px) {
   .pj-item {
-    grid-template-columns: 1fr 36px;
-    padding-left: clamp(4rem, 11vw, 6rem);
+    grid-template-columns: 1fr;
+    padding-left: 0;
+    gap: var(--space-md);
   }
-  .pj-item__num {
-    font-size: clamp(3.5rem, 10vw, 5rem);
+  .pj-item__name {
+    font-size: clamp(1.25rem, 5vw, 2rem);
   }
-  .pj-item__meta { display: none; }
+  .pj-item__meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-sm);
+  }
+  .pj-item__stack {
+    justify-content: flex-start;
+  }
+  .pj-item__side {
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-md);
+  }
   .pj-item__preview { display: none; }
 }
 
@@ -1037,8 +1052,8 @@ body::after {
 ═══════════════════════════════════════════ */
 .skills__globe {
   display: block;
-  width: min(720px, 96vw);
-  height: min(720px, 96vw);
+  width: min(720px, 100%);
+  aspect-ratio: 1 / 1;
   margin: var(--space-lg) auto 0;
   cursor: none;
 }
@@ -1203,36 +1218,80 @@ body::after {
   filter: grayscale(0%);
 }
 
-/* Social links below photo */
+/* Social links below photo — 2×2 button grid */
 .about__socials {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
   margin-top: var(--space-md);
-  border-top: 1px solid var(--border);
-  padding-top: var(--space-xs);
 }
 .about__social {
   display: flex;
   align-items: center;
-  gap: var(--space-sm);
-  padding: 10px 0;
+  gap: 8px;
+  padding: 12px 14px;
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: 0.8rem;
+  font-weight: 500;
   color: var(--text-dim);
-  border-bottom: 1px solid var(--border);
-  transition: color var(--transition), padding-left var(--transition);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-card);
+  transition: color var(--transition), border-color var(--transition),
+              background var(--transition), transform var(--transition);
+  white-space: nowrap;
 }
-.about__social:last-child { border-bottom: none; }
 .about__social:hover {
-  color: var(--accent);
-  padding-left: 4px;
+  color: var(--text);
+  border-color: var(--border-hover);
+  background: #111;
+  transform: translateY(-2px);
 }
+
+/* WhatsApp — full width, green accent */
+.about__social:nth-child(3) {
+  grid-column: 1 / -1;
+  color: #25D366;
+  border-color: rgba(37, 211, 102, 0.35);
+  background: rgba(37, 211, 102, 0.06);
+  font-size: 0.85rem;
+  justify-content: center;
+}
+.about__social:nth-child(3):hover {
+  background: rgba(37, 211, 102, 0.14);
+  border-color: #25D366;
+  color: #25D366;
+  transform: translateY(-2px);
+}
+
+/* Download CV — full width, accent */
+.about__social:nth-child(4) {
+  grid-column: 1 / -1;
+  color: var(--accent);
+  border-color: rgba(200, 255, 0, 0.35);
+  background: rgba(200, 255, 0, 0.05);
+  font-size: 0.85rem;
+  justify-content: center;
+}
+.about__social:nth-child(4):hover {
+  background: var(--accent-dim);
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+
 .about__social-icon {
-  width: 13px;
-  height: 13px;
+  width: 15px;
+  height: 15px;
   flex-shrink: 0;
-  opacity: 0.6;
+  opacity: 0.7;
   transition: opacity var(--transition);
+}
+.about__social:nth-child(3) .about__social-icon,
+.about__social:nth-child(4) .about__social-icon {
+  width: 18px;
+  height: 18px;
+  opacity: 0.9;
 }
 .about__social:hover .about__social-icon { opacity: 1; }
 .about__social-arrow {
@@ -1240,6 +1299,8 @@ body::after {
   transition: transform var(--transition);
   font-size: 0.75rem;
 }
+.about__social:nth-child(3) .about__social-arrow,
+.about__social:nth-child(4) .about__social-arrow { display: none; }
 .about__social:hover .about__social-arrow { transform: translate(2px, -2px); }
 
 /* ── Bio copy ─────────────────────────────── */
@@ -1490,7 +1551,35 @@ body::after {
     --space-2xl: 72px;
   }
 
+  /* Reduce padding so content breathes on small screens */
+  .container {
+    padding: 0 var(--space-md);
+  }
+
+  /* Hero uses its own padding (not .container) */
+  .hero {
+    padding-left: var(--space-md);
+    padding-right: var(--space-md);
+  }
+
   /* Nav mobile */
+  .nav {
+    padding-left: var(--space-md);
+    padding-right: var(--space-md);
+  }
+  /* CRITICAL: backdrop-filter on the nav (applied via .is-scrolled) makes it
+     a containing block for position:fixed children in Chromium, collapsing the
+     mobile menu overlay. We disable it on mobile and use a solid background instead. */
+  .nav.is-scrolled {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: rgba(7, 7, 7, 0.97);
+  }
+  .nav__logo {
+    font-size: 0.8rem;
+    position: relative;
+    z-index: 160; /* above the overlay so logo remains visible when menu is open */
+  }
   .nav__links {
     position: fixed;
     inset: var(--nav-h) 0 0 0;
@@ -1501,12 +1590,13 @@ body::after {
     gap: var(--space-xl);
     transform: translateX(100%);
     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 150; /* above nav (100) so page content is fully covered */
   }
   .nav__links.is-open { transform: translateX(0); }
   .nav__link { font-size: 1.4rem; }
   .nav__link--cta { padding: 12px 28px; }
   .nav__lang { font-size: 1rem; padding: 8px 20px; }
-  .nav__toggle { display: flex; }
+  .nav__toggle { display: flex; z-index: 160; position: relative; } /* above the overlay */
 
   .hero__stats {
     flex-wrap: wrap;
@@ -1522,4 +1612,27 @@ body::after {
 @media (max-width: 420px) {
   .hero__actions { flex-direction: column; }
   .btn { width: 100%; justify-content: center; }
+
+  .nav__logo {
+    font-size: 0.72rem;
+    letter-spacing: 0.03em;
+  }
+
+  .pj-item__name {
+    font-size: clamp(1.1rem, 5vw, 1.5rem);
+  }
+}
+
+/* ── TOUCH / MOBILE DEVICES ───────────────── */
+@media (pointer: coarse) {
+  body { cursor: auto; }
+  .cursor { display: none !important; }
+  button, a, .pj-item, .tag, .projects__toggle, .nav__lang, .nav__toggle {
+    cursor: pointer;
+  }
+  .btn { cursor: pointer; }
+
+  /* Disable hover-only effects that don't work on touch */
+  .pj-item:hover::after { opacity: 0; }
+  .pillar:hover .pillar__inner { transform: none; }
 }

@@ -206,16 +206,18 @@
   }
 
   /* ─── INIT ───────────────────────────────── */
-  document.addEventListener('DOMContentLoaded', () => {
-    applyTranslations(currentLang);
+  // Scripts are loaded at the end of <body>, so the DOM is already
+  // fully parsed when this runs — no need for DOMContentLoaded.
+  // Running synchronously ensures translations are applied BEFORE
+  // animations.js splits elements like .contact__title into spans.
+  applyTranslations(currentLang);
 
-    const langBtn = document.getElementById('langToggle');
-    if (langBtn) {
-      langBtn.addEventListener('click', () => {
-        applyTranslations(currentLang === 'en' ? 'es' : 'en');
-      });
-    }
-  });
+  const langBtn = document.getElementById('langToggle');
+  if (langBtn) {
+    langBtn.addEventListener('click', () => {
+      applyTranslations(currentLang === 'en' ? 'es' : 'en');
+    });
+  }
 
   /* ─── PUBLIC API ─────────────────────────── */
   window.i18n = {
