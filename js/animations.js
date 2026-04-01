@@ -375,17 +375,27 @@ const _isTouch = window.matchMedia('(pointer: coarse)').matches;
   if (typeof anime === 'undefined') return;
 
   document.querySelectorAll('.section__title').forEach(title => {
-    const text = title.textContent;
+    // Process node by node to preserve HTML elements like <em class="accent-word">
+    const newHTML = Array.from(title.childNodes).map(node => {
+      if (node.nodeType === Node.TEXT_NODE) {
+        return node.textContent.split('').map(c =>
+          c === ' '
+            ? ' '
+            : `<span class="char" style="display:inline-block;opacity:0;transform:translateY(36px)">${c}</span>`
+        ).join('');
+      } else if (node.nodeType === Node.ELEMENT_NODE) {
+        const attrs = Array.from(node.attributes).map(a => `${a.name}="${a.value}"`).join(' ');
+        const innerChars = node.textContent.split('').map(c =>
+          c === ' '
+            ? ' '
+            : `<span class="char" style="display:inline-block;opacity:0;transform:translateY(36px)">${c}</span>`
+        ).join('');
+        return `<${node.tagName.toLowerCase()} ${attrs}>${innerChars}</${node.tagName.toLowerCase()}>`;
+      }
+      return '';
+    }).join('');
 
-    // Replace text with individual character spans
-    title.innerHTML = text
-      .split('')
-      .map(c =>
-        c === ' '
-          ? ' '
-          : `<span class="char" style="display:inline-block;opacity:0;transform:translateY(36px)">${c}</span>`
-      )
-      .join('');
+    title.innerHTML = newHTML;
 
     const chars  = title.querySelectorAll('.char');
     const header = title.closest('.section__header') || title;
