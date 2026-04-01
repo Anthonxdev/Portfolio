@@ -20,7 +20,7 @@ jobs:
           port: 21
           username: anthonx.dev@anthonx.dev
           password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: ./anthox.dev/
+          server-dir: ./
           exclude: |
             **/.git*
             **/.git*/**
