@@ -13,6 +13,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Cache busting
+        run: |
+          VERSION=$(git rev-parse --short HEAD)
+          sed -i "s/\.css\"/\.css?v=$VERSION\"/g" index.html
+          sed -i "s/\.js\"/\.js?v=$VERSION\"/g" index.html
+
       - name: Deploy via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
