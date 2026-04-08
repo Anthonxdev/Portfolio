@@ -39,6 +39,22 @@
 })();
 
 /* ═══════════════════════════════════════════
+   SMOOTH ANCHOR SCROLL
+   Handled here so html { scroll-behavior } can
+   stay 'auto', avoiding the initial-section lag.
+═══════════════════════════════════════════ */
+(function initSmoothScroll() {
+  document.addEventListener('click', e => {
+    const a = e.target.closest('a[href^="#"]');
+    if (!a) return;
+    const target = document.querySelector(a.getAttribute('href'));
+    if (!target) return;
+    e.preventDefault();
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+})();
+
+/* ═══════════════════════════════════════════
    NAV — scroll + mobile toggle
 ═══════════════════════════════════════════ */
 (function initNav() {

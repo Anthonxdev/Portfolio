@@ -490,32 +490,43 @@ const _isTouch = window.matchMedia('(pointer: coarse)').matches;
   /* ── Mouse tracking (canvas-relative) ──── */
   let mX = -9999, mY = -9999;
   let tOx = 0, tOy = 0, cOx = 0, cOy = 0;
+  let cachedRect = null;
 
   document.addEventListener('mousemove', e => {
-    const rect = canvas.getBoundingClientRect();
-    mX  = e.clientX - rect.left;
-    mY  = e.clientY - rect.top;
-    tOx = (mX - rect.width  / 2) * 0.020;
-    tOy = (mY - rect.height / 2) * 0.020;
+    if (canvasPaused || !cachedRect) return;
+    mX  = e.clientX - cachedRect.left;
+    mY  = e.clientY - cachedRect.top;
+    tOx = (mX - cachedRect.width  / 2) * 0.020;
+    tOy = (mY - cachedRect.height / 2) * 0.020;
   }, { passive: true });
 
   /* ── Resize ──────────────────────────────── */
   function resize() {
     const dpr = window.devicePixelRatio || 1;
-    const rect = canvas.getBoundingClientRect();
-    W = rect.width;
-    H = rect.height;
+    cachedRect = canvas.getBoundingClientRect();
+    W = cachedRect.width;
+    H = cachedRect.height;
     canvas.width  = W * dpr;
     canvas.height = H * dpr;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   }
   resize();
   window.addEventListener('resize', resize, { passive: true });
+  window.addEventListener('scroll', () => { cachedRect = canvas.getBoundingClientRect(); }, { passive: true });
+
+  /* ── Visibility gate — pause when off-screen ── */
+  let canvasPaused = false;
+  const visObs = new IntersectionObserver(
+    ([entry]) => { canvasPaused = !entry.isIntersecting; },
+    { threshold: 0 }
+  );
+  visObs.observe(canvas);
 
   /* ── Draw loop ───────────────────────────── */
   let startTime = null;
 
   function draw(ts) {
+    if (canvasPaused) { requestAnimationFrame(draw); return; }
     if (!startTime) startTime = ts;
     const t = ts - startTime;
 
