@@ -195,37 +195,44 @@
 })();
 
 /* ═══════════════════════════════════════════
-   PROJECTS — Animación entrada derecha→izquierda
-   Usa anime.js (ya cargado en el HTML)
+   PROJECTS — Fly-in desde los lados
+   Impares ← izquierda, pares → derecha.
+   Cada item se activa individualmente al entrar
+   en el viewport. Se dispara una sola vez.
 ═══════════════════════════════════════════ */
 (function initProjectsEntrance() {
   if (typeof anime === 'undefined') return;
 
-  const list = document.getElementById('projectsList');
-  if (!list) return;
+  const items = Array.from(document.querySelectorAll('#projectsList .pj-item'));
+  if (!items.length) return;
 
-  let animated = false;
+  // Estado inicial: escondidos a su lado correspondiente
+  items.forEach((item, i) => {
+    const fromLeft = i % 2 === 0;
+    item.style.opacity  = '0';
+    item.style.transform = `translateX(${fromLeft ? '-110px' : '110px'}) rotate(${fromLeft ? '-3' : '3'}deg)`;
+  });
 
   const observer = new IntersectionObserver(entries => {
-    if (animated || !entries[0].isIntersecting) return;
-    animated = true;
-    observer.disconnect();
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      observer.unobserve(entry.target);
 
-    const visibleItems = Array.from(list.querySelectorAll('.pj-item'))
-      .filter(el => el.style.display !== 'none');
+      const i         = items.indexOf(entry.target);
+      const fromLeft  = i % 2 === 0;
 
-    anime({
-      targets: visibleItems,
-      opacity:    [0, 1],
-      translateY: [40, 0],
-      scale:      [0.97, 1],
-      duration:   600,
-      delay:      anime.stagger(80, { start: 80 }),
-      easing:     'easeOutCubic'
+      anime({
+        targets:    entry.target,
+        opacity:    [0, 1],
+        translateX: [fromLeft ? -110 : 110, 0],
+        rotate:     [fromLeft ? -3 : 3, 0],
+        duration:   750,
+        easing:     'easeOutBack',
+      });
     });
-  }, { threshold: 0.1 });
+  }, { threshold: 0.15 });
 
-  observer.observe(list);
+  items.forEach(item => observer.observe(item));
 })();
 
 /* ═══════════════════════════════════════════
@@ -269,13 +276,12 @@
       hidden.forEach(item => {
         item.style.display = '';
         item.style.opacity = '0';
-        item.style.transform = 'translateY(40px) scale(0.97)';
+        item.style.transform = 'translateX(80px)';
       });
       anime({
         targets: hidden,
         opacity:    [0, 1],
-        translateY: [40, 0],
-        scale:      [0.97, 1],
+        translateX: [80, 0],
         duration:   600,
         delay:      anime.stagger(80, { start: 60 }),
         easing:     'easeOutCubic'
