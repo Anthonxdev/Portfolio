@@ -327,39 +327,59 @@ const _isTouch = window.matchMedia('(pointer: coarse)').matches;
 (function initCursorTrail() {
   if (_isTouch) return;
 
+  // Canvas único — cero DOM mutations en cada frame
+  const canvas = document.createElement('canvas');
+  Object.assign(canvas.style, {
+    position:      'fixed',
+    inset:         '0',
+    width:         '100%',
+    height:        '100%',
+    pointerEvents: 'none',
+    zIndex:        '9996',
+  });
+  document.body.appendChild(canvas);
+
+  const ctx = canvas.getContext('2d');
+  let W = window.innerWidth, H = window.innerHeight;
+  canvas.width  = W;
+  canvas.height = H;
+
+  window.addEventListener('resize', () => {
+    W = window.innerWidth;
+    H = window.innerHeight;
+    canvas.width  = W;
+    canvas.height = H;
+  }, { passive: true });
+
+  const dots = [];
   let prevX = 0, prevY = 0;
 
   document.addEventListener('mousemove', e => {
     const dist = Math.hypot(e.clientX - prevX, e.clientY - prevY);
-    if (dist < 14) return; // skip if barely moved
+    if (dist < 14) return;
     prevX = e.clientX;
     prevY = e.clientY;
-
-    const dot  = document.createElement('div');
-    const size = Math.random() * 4 + 3; // 3–7 px
-    Object.assign(dot.style, {
-      position:      'fixed',
-      width:         size + 'px',
-      height:        size + 'px',
-      borderRadius:  '50%',
-      background:    '#c8ff00',
-      pointerEvents: 'none',
-      zIndex:        '9996',
-      left:          e.clientX + 'px',
-      top:           e.clientY + 'px',
-      transform:     'translate(-50%, -50%)',
+    dots.push({
+      x:       e.clientX,
+      y:       e.clientY,
+      r:       Math.random() * 2 + 2,   // 2–4 px
+      opacity: 0.65,
     });
-    document.body.appendChild(dot);
+  }, { passive: true });
 
-    anime({
-      targets:  dot,
-      opacity:  [0.65, 0],
-      scale:    [1, 0.1],
-      duration: 650,
-      easing:   'easeOutExpo',
-      complete() { dot.remove(); },
-    });
-  });
+  (function loop() {
+    ctx.clearRect(0, 0, W, H);
+    for (let i = dots.length - 1; i >= 0; i--) {
+      const d = dots[i];
+      d.opacity -= 0.025;
+      if (d.opacity <= 0) { dots.splice(i, 1); continue; }
+      ctx.beginPath();
+      ctx.arc(d.x, d.y, d.r * d.opacity, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(200,255,0,${d.opacity})`;
+      ctx.fill();
+    }
+    requestAnimationFrame(loop);
+  })();
 })();
 
 
