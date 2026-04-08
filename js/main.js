@@ -217,9 +217,10 @@
     anime({
       targets: visibleItems,
       opacity:    [0, 1],
-      translateX: [80, 0],
-      duration:   650,
-      delay:      anime.stagger(90, { start: 100 }),
+      translateY: [40, 0],
+      scale:      [0.97, 1],
+      duration:   600,
+      delay:      anime.stagger(80, { start: 80 }),
       easing:     'easeOutCubic'
     });
   }, { threshold: 0.1 });
@@ -268,12 +269,13 @@
       hidden.forEach(item => {
         item.style.display = '';
         item.style.opacity = '0';
-        item.style.transform = 'translateX(80px)';
+        item.style.transform = 'translateY(40px) scale(0.97)';
       });
       anime({
         targets: hidden,
         opacity:    [0, 1],
-        translateX: [80, 0],
+        translateY: [40, 0],
+        scale:      [0.97, 1],
         duration:   600,
         delay:      anime.stagger(80, { start: 60 }),
         easing:     'easeOutCubic'
