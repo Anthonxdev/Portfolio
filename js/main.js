@@ -25,8 +25,8 @@
   function animateCursor() {
     curX += (mouseX - curX) * 0.18;
     curY += (mouseY - curY) * 0.18;
-    cursor.style.left = curX + 'px';
-    cursor.style.top  = curY + 'px';
+    // translate es compositor-only — no dispara layout como left/top
+    cursor.style.translate = `${curX}px ${curY}px`;
     requestAnimationFrame(animateCursor);
   }
   animateCursor();

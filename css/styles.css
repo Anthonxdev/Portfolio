@@ -11,7 +11,7 @@ html {
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 body {
@@ -19,7 +19,7 @@ body {
   background-color: var(--bg);
   color: var(--text);
   line-height: 1.6;
-  overflow-x: hidden;
+  overflow-x: clip;
   cursor: none; /* custom cursor */
 }
 
@@ -302,7 +302,7 @@ body::after {
   justify-content: flex-start;
   gap: clamp(2.5rem, 7vh, 5rem);
   padding: calc(var(--nav-h) + var(--space-xl)) var(--space-lg) var(--space-xl);
-  overflow: hidden;
+  overflow: clip;
 }
 
 /* Dot grid background */
@@ -385,7 +385,8 @@ body::after {
 
 .hero__word {
   display: block;
-  overflow: hidden;
+  overflow: clip;
+  pointer-events: none;
 }
 .hero__word--accent { color: var(--accent); }
 
@@ -490,6 +491,9 @@ body::after {
   line-height: 1;
   margin-bottom: 6px;
 }
+
+/* Decorative animation spans — must never intercept pointer/scroll events */
+.char, .c-char { pointer-events: none; }
 
 .section__sub {
   font-size: 0.875rem;
@@ -993,7 +997,7 @@ body::after {
 /* ── Projects collapsible wrap ────────────── */
 .projects__grid-wrap {
   position: relative;
-  overflow: hidden;
+  overflow: clip;
   transition: max-height 0.75s cubic-bezier(0.4, 0, 0.2, 1);
 }
 

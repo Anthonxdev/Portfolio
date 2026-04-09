@@ -513,7 +513,7 @@ const _isTouch = window.matchMedia('(pointer: coarse)').matches;
   let cachedRect = null;
 
   document.addEventListener('mousemove', e => {
-    if (canvasPaused || !cachedRect) return;
+    if (!cachedRect) return;
     mX  = e.clientX - cachedRect.left;
     mY  = e.clientY - cachedRect.top;
     tOx = (mX - cachedRect.width  / 2) * 0.020;
@@ -535,18 +535,11 @@ const _isTouch = window.matchMedia('(pointer: coarse)').matches;
   window.addEventListener('scroll', () => { cachedRect = canvas.getBoundingClientRect(); }, { passive: true });
 
   /* ── Visibility gate — pause when off-screen ── */
-  let canvasPaused = false;
-  const visObs = new IntersectionObserver(
-    ([entry]) => { canvasPaused = !entry.isIntersecting; },
-    { threshold: 0 }
-  );
-  visObs.observe(canvas);
-
   /* ── Draw loop ───────────────────────────── */
   let startTime = null;
+  let rafId = null;
 
   function draw(ts) {
-    if (canvasPaused) { requestAnimationFrame(draw); return; }
     if (!startTime) startTime = ts;
     const t = ts - startTime;
 
@@ -609,10 +602,7 @@ const _isTouch = window.matchMedia('(pointer: coarse)').matches;
     ctx.beginPath();
     ctx.arc(cx, cy, 2.5 + pulse * 1.8, 0, Math.PI * 2);
     ctx.fillStyle   = '#c8ff00';
-    ctx.shadowColor = '#c8ff00';
-    ctx.shadowBlur  = 12;
     ctx.fill();
-    ctx.shadowBlur  = 0;
 
     /* — Orbital items — */
     ORBITS.forEach(o => {
@@ -628,8 +618,10 @@ const _isTouch = window.matchMedia('(pointer: coarse)').matches;
         ctx.fillStyle   = h > 0.05
           ? `rgba(200,255,0,${0.5 + h * 0.5})`
           : (o.glow ? '#c8ff00' : o.baseColor);
-        ctx.shadowColor = '#c8ff00';
-        ctx.shadowBlur  = (o.glow ? 8 : 0) + h * 14;
+        if (h > 0.01) {
+          ctx.shadowColor = '#c8ff00';
+          ctx.shadowBlur  = h * 14;
+        }
         ctx.fill();
         ctx.shadowBlur  = 0;
 
@@ -644,17 +636,27 @@ const _isTouch = window.matchMedia('(pointer: coarse)').matches;
         ctx.fillStyle    = h > 0.05
           ? `rgba(200,255,0,${0.6 + h * 0.4})`
           : (o.glow ? '#c8ff00' : o.baseColor);
-        ctx.shadowColor  = '#c8ff00';
-        ctx.shadowBlur   = (o.glow ? 6 : 0) + h * 10;
+        if (h > 0.01) {
+          ctx.shadowColor = '#c8ff00';
+          ctx.shadowBlur  = h * 10;
+        }
         ctx.fillText(node.label, tx, ty);
         ctx.shadowBlur   = 0;
       });
     });
 
-    requestAnimationFrame(draw);
+    rafId = requestAnimationFrame(draw);
   }
 
-  requestAnimationFrame(draw);
+  new IntersectionObserver(([entry]) => {
+    if (entry.isIntersecting && !rafId) {
+      startTime = null;
+      rafId = requestAnimationFrame(draw);
+    } else if (!entry.isIntersecting && rafId) {
+      cancelAnimationFrame(rafId);
+      rafId = null;
+    }
+  }, { threshold: 0 }).observe(canvas);
 
   /* ── Fade in after hero entrance ─────────── */
   if (typeof anime !== 'undefined') {
@@ -1019,8 +1021,11 @@ const _isTouch = window.matchMedia('(pointer: coarse)').matches;
       const fSize     = Math.max(9,  (11 + depth * 8)  * s);
       const c         = rgb(n.color);
 
-      ctx.shadowColor = n.color;
-      ctx.shadowBlur  = depth > 0.6 ? depth * 18 : 0;
+      const isHoveredNode = hoveredNode && n.name === hoveredNode.name;
+      if (isHoveredNode) {
+        ctx.shadowColor = n.color;
+        ctx.shadowBlur  = depth * 18;
+      }
 
       ctx.save();
       ctx.translate(px - iconSize / 2, py - iconSize / 2);
