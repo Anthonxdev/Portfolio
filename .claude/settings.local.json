@@ -3,7 +3,8 @@
     "allow": [
       "WebFetch(domain:simpleicons.org)",
       "WebFetch(domain:cdn.simpleicons.org)",
-      "Bash(wc:*)"
+      "Bash(wc:*)",
+      "WebFetch(domain:royalsaturncorporation.com)"
     ]
   }
 }

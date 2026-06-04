@@ -31,7 +31,7 @@
   }
   animateCursor();
 
-  const hoverTargets = 'a, button, .pj-item, .tag, .pillar';
+  const hoverTargets = 'a, button, .pj-card, .tag, .pillar';
   document.querySelectorAll(hoverTargets).forEach(el => {
     el.addEventListener('mouseenter', () => cursor.classList.add('cursor--hover'));
     el.addEventListener('mouseleave', () => cursor.classList.remove('cursor--hover'));
@@ -195,107 +195,35 @@
 })();
 
 /* ═══════════════════════════════════════════
-   PROJECTS — Fly-in desde los lados
-   Impares ← izquierda, pares → derecha.
-   Cada item se activa individualmente al entrar
-   en el viewport. Se dispara una sola vez.
+   PROJECTS — Reveal al entrar al viewport
+   Reveal liviano basado en clase CSS (.is-visible)
+   con stagger por transition-delay. Sin animar
+   cada elemento por JS → scroll fluido.
 ═══════════════════════════════════════════ */
-(function initProjectsEntrance() {
-  if (typeof anime === 'undefined') return;
+(function initProjectsReveal() {
+  const cards = Array.from(document.querySelectorAll('#projectsList .pj-card'));
+  if (!cards.length) return;
 
-  const items = Array.from(document.querySelectorAll('#projectsList .pj-item'));
-  if (!items.length) return;
-
-  // Estado inicial: escondidos a su lado correspondiente
-  items.forEach((item, i) => {
-    const fromLeft = i % 2 === 0;
-    item.style.opacity  = '0';
-    item.style.transform = `translateX(${fromLeft ? '-110px' : '110px'}) rotate(${fromLeft ? '-3' : '3'}deg)`;
-  });
-
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      observer.unobserve(entry.target);
-
-      const i         = items.indexOf(entry.target);
-      const fromLeft  = i % 2 === 0;
-
-      anime({
-        targets:    entry.target,
-        opacity:    [0, 1],
-        translateX: [fromLeft ? -110 : 110, 0],
-        rotate:     [fromLeft ? -3 : 3, 0],
-        duration:   750,
-        easing:     'easeOutBack',
-      });
-    });
-  }, { threshold: 0.15 });
-
-  items.forEach(item => observer.observe(item));
-})();
-
-/* ═══════════════════════════════════════════
-   PROJECTS — Imagen de fondo en el row al hover
-═══════════════════════════════════════════ */
-(function initProjectPreviews() {
-  document.querySelectorAll('.pj-item').forEach(item => {
-    const img = item.querySelector('.pj-item__preview img');
-    if (!img) return;
-    item.style.setProperty('--pj-preview-bg', `url('${img.src}')`);
-    item.classList.add('has-preview');
-  });
-})();
-
-/* ═══════════════════════════════════════════
-   PROJECTS — Ver más / Ver menos
-═══════════════════════════════════════════ */
-(function initProjectsToggle() {
-  const list = document.getElementById('projectsList');
-  const btn  = document.getElementById('projectsToggle');
-  if (!list || !btn) return;
-
-  const items   = Array.from(list.querySelectorAll('.pj-item'));
-  const VISIBLE = 3;
-
-  // Si hay pocos proyectos, ocultar el botón
-  if (items.length <= VISIBLE) {
-    btn.closest('.projects__toggle-bar').style.display = 'none';
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduceMotion) {
+    cards.forEach(card => card.classList.add('is-visible'));
     return;
   }
 
-  const hidden = items.slice(VISIBLE);
-  hidden.forEach(item => item.style.display = 'none');
+  const observer = new IntersectionObserver((entries, obs) => {
+    // Stagger sutil entre tarjetas que entran a la vez
+    let shown = 0;
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const card = entry.target;
+      card.style.transitionDelay = `${shown * 70}ms`;
+      card.classList.add('is-visible');
+      shown++;
+      obs.unobserve(card);
+    });
+  }, { threshold: 0.12 });
 
-  btn.addEventListener('click', () => {
-    const isOpen = btn.classList.toggle('is-open');
-    btn.setAttribute('aria-expanded', isOpen);
-    const label = btn.querySelector('.projects__toggle-text');
-
-    if (isOpen) {
-      hidden.forEach(item => {
-        item.style.display = '';
-        item.style.opacity = '0';
-        item.style.transform = 'translateX(80px)';
-      });
-      anime({
-        targets: hidden,
-        opacity:    [0, 1],
-        translateX: [80, 0],
-        duration:   600,
-        delay:      anime.stagger(80, { start: 60 }),
-        easing:     'easeOutCubic'
-      });
-      label.textContent = window.i18n ? window.i18n.t('projects.toggle.less') : 'View less';
-    } else {
-      hidden.forEach(item => {
-        item.style.display = 'none';
-        item.classList.remove('is-visible');
-      });
-      label.textContent = window.i18n ? window.i18n.t('projects.toggle.more') : 'View all projects';
-      list.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  });
+  cards.forEach(card => observer.observe(card));
 })();
 
 /* ═══════════════════════════════════════════
