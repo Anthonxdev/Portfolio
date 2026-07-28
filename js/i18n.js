@@ -36,6 +36,9 @@
       /* Projects */
       'projects.title'            : 'Projects',
       'projects.sub'              : 'A selection of recent work',
+      'projects.zonapaisa.desc'   : 'Tourism directory and community for Medellín and the Paisa region — venues, events and reviews',
+      'projects.dreamcityre.desc' : 'Real estate brokerage for the Dominican north coast — Sosúa, Cabarete and Puerto Plata',
+      'projects.dreamcitycorp.desc': 'Corporate site for a developer of residential communities and resorts in Puerto Plata',
       'projects.vamosrural.desc'  : 'Marketplace for rural tourism experiences across northern Spain',
       'projects.mapple.desc'      : 'Online custom merchandise store — sublimation, DTF printing and laser engraving',
       'projects.aapp.desc'        : 'Site for the Puerto Plata Chess Association — tournaments, ratings and news',
@@ -111,6 +114,9 @@
       /* Projects */
       'projects.title'            : 'Proyectos',
       'projects.sub'              : 'Una selección de trabajos recientes',
+      'projects.zonapaisa.desc'   : 'Directorio turístico y comunidad de Medellín y la Zona Paisa — lugares, eventos y reseñas',
+      'projects.dreamcityre.desc' : 'Corredora inmobiliaria de la costa norte dominicana — Sosúa, Cabarete y Puerto Plata',
+      'projects.dreamcitycorp.desc': 'Sitio corporativo de una desarrolladora de comunidades residenciales y resorts en Puerto Plata',
       'projects.vamosrural.desc'  : 'Marketplace de experiencias de turismo rural en el norte de España',
       'projects.mapple.desc'      : 'Tienda en línea de artículos personalizados — sublimación, DTF y grabado láser',
       'projects.aapp.desc'        : 'Sitio de la Asociación de Ajedrez de Puerto Plata — torneos, ratings y noticias',

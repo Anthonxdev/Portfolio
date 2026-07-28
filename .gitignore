@@ -13,3 +13,6 @@ desktop.ini
 
 # Assets temporales
 assets/img/.gitkeep
+
+# Clon duplicado del propio repo
+/Portfolio/
